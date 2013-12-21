@@ -6,10 +6,10 @@ import com.foolver.game.app.game.GameTime;
 import com.foolver.game.app.input.abstr.InputHandler;
 import com.foolver.game.app.states.abstr.GameState;
 
-public class PlayState extends GameState {
+public class LoginState extends GameState {
 
 	@Override
-	public void update(GameTime gameTime, InputHandler inputHandler ) {
+	public void update(GameTime gameTime, InputHandler inputHandler) {
 
 	}
 

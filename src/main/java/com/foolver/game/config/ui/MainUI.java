@@ -2,9 +2,14 @@ package com.foolver.game.config.ui;
 
 import org.vaadin.hezamu.canvas.Canvas;
 
-import com.foolver.game.app.*;
+import com.foolver.game.app.game.Game;
+import com.foolver.game.app.input.abstr.InputHandler;
+import com.foolver.game.app.input.impl.InputHandlerImpl;
+import com.foolver.game.app.launcher.GameLauncher;
 import com.foolver.game.app.states.abstr.GameState;
 import com.foolver.game.app.states.impl.MainState;
+import com.foolver.game.utils.Constants;
+import com.foolver.game.utils.mock.MockInputHandler;
 import com.vaadin.annotations.Push;
 import com.vaadin.server.*;
 import com.vaadin.ui.*;
@@ -19,8 +24,8 @@ public class MainUI extends UI {
 	private Canvas canvas;
 
 	private GameState gameState = new MainState();
-
-	private final Game game = new Game(gameState);
+	//TODO: using a mock inputhandler
+	private final Game game = new Game(gameState, new MockInputHandler());
 
 	@Override
 	protected void init(VaadinRequest request) {
@@ -32,14 +37,9 @@ public class MainUI extends UI {
 	}
 
 	private void configureCanvas() {
-		addCanvasToMainLayout();
-
-	}
-
-	private void addCanvasToMainLayout() {
 		canvas = new Canvas();
-		canvas.setHeight(getPxOfInteger(800));
-		canvas.setWidth(getPxOfInteger(600));
+		canvas.setWidth(getPxOfInteger(Constants.CANVAS_WIDTH));
+		canvas.setHeight(getPxOfInteger(Constants.CANVAS_HEIGHT));
 		layout.addComponent(canvas);
 	}
 
@@ -59,7 +59,7 @@ public class MainUI extends UI {
 	}
 
 	protected synchronized void startGameThread() {
-		Thread gameLauncher = new GameLauncher(this,game,canvas);
+		Thread gameLauncher = new GameLauncher(this, game, canvas);
 		gameLauncher.start();
 	}
 

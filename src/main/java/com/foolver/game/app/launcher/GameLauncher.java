@@ -1,14 +1,15 @@
-package com.foolver.game.app;
+package com.foolver.game.app.launcher;
 
 import org.vaadin.hezamu.canvas.Canvas;
 
+import com.foolver.game.app.game.Game;
 import com.vaadin.external.org.slf4j.*;
 import com.vaadin.ui.UI;
 
 public class GameLauncher extends Thread{
 
 	private static final Logger logger = LoggerFactory.getLogger(GameLauncher.class);
-	private static final int PAUSE_TIME_MS = 167;
+	private static final int PAUSE_TIME_MS = 333;
 
 	private UI ui;
 	private Game game;

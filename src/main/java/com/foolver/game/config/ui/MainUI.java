@@ -1,10 +1,8 @@
-package org.vaadin.sami.javaday;
+package com.foolver.game.config.ui;
 
 import org.vaadin.hezamu.canvas.Canvas;
-import org.vaadin.sami.tetris.Game;
-import org.vaadin.sami.tetris.Grid;
-import org.vaadin.sami.tetris.Tetromino;
 
+import com.foolver.game.app.*;
 import com.vaadin.annotations.Push;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.Page;
@@ -20,7 +18,9 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Push
-public class TetrisUI extends UI {
+public class MainUI extends UI {
+
+	private static final String PAGE_TITLE = "The game";
 
 	private static final int PAUSE_TIME_MS = 500;
 
@@ -47,52 +47,34 @@ public class TetrisUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		Page.getCurrent().setTitle("Vaadin Tetris");
-		layout = new VerticalLayout();
-		layout.setSpacing(true);
-		layout.setMargin(true);
+		setPageTitle();
+		configureMainLayout();
 		setContent(layout);
+		configureComponents();
+	}
 
-		layout.addComponent(new Label(
-				"<h1>Serverside Tetris - using plain web technologies</h1>"
-						+ "This is a demo application that "
-						+ "proves server side java can work for even "
-						+ "interactive games. Game code runs in server side using "
-						+ "<a href='http://vaadin.com/'>Vaadin</a>, constantly open "
-						+ "communication channel is provided Vaadin 7.1 Push"
-						+ "and graphics are drawn with <a href='http://vaadin.com/directory#addon/canvas'>Canvas addon"
-						+ " widget</a>. Note that the communication is not even optimized "
-						+ "anyhow. With e.g. SVG and based solution the amount of "
-						+ "transfered data would be much smaller. Still the game is playable, even over mobile GSM network.",
-				ContentMode.HTML));
+	private void configureComponents() {
+		addInstructionLabelComponentToMainLayout();
+		addRestartButtonToMainLayout();
+		HorizontalLayout buttonsLayout = addButtonLayoutToMainLayout();
+		addButtonsToButtonsLayout(buttonsLayout);
+		addCanvasToMainLayout();
+		addScoreLabelToMainLayout();
+	}
 
-		// Button for restarting the game
-		final Button restartBtn;
-		layout.addComponent(restartBtn = new Button("start",
-				new Button.ClickListener() {
-					private static final long serialVersionUID = 1L;
+	private void addScoreLabelToMainLayout() {
+		scoreLabel = new Label("");
+		layout.addComponent(scoreLabel);
+	}
 
-					public void buttonClick(ClickEvent event) {
-						running = !running;
-						if (running) {
-							game = new Game(10, 20);
-							startGameThread();
-							event.getButton().setCaption("stop");
-						} else {
-							event.getButton().setCaption("start");
-							gameOver();
-						}
+	private void addCanvasToMainLayout() {
+		canvas = new Canvas();
+		canvas.setHeight((TILE_SIZE * PLAYFIELD_H) + "px");
+		canvas.setWidth((TILE_SIZE * PLAYFIELD_W) + "px");
+		layout.addComponent(canvas);
+	}
 
-					}
-				}));
-		restartBtn.setClickShortcut(KeyCode.ESCAPE);
-
-		// Layout for control buttons
-		HorizontalLayout buttons = new HorizontalLayout();
-		buttons.setMargin(false);
-		buttons.setSpacing(true);
-		layout.addComponent(buttons);
-
+	private void addButtonsToButtonsLayout(HorizontalLayout buttons) {
 		// Button for moving left
 		final Button leftBtn;
 		buttons.addComponent(leftBtn = new Button("left",
@@ -157,23 +139,67 @@ public class TetrisUI extends UI {
 					}
 				}));
 		dropBtn.setClickShortcut(KeyCode.SPACEBAR);
+	}
 
-		// Canvas for the game
-		canvas = new Canvas();
-		layout.addComponent(canvas);
-		canvas.setWidth((TILE_SIZE * PLAYFIELD_W) + "px");
-		canvas.setHeight((TILE_SIZE * PLAYFIELD_H) + "px");
-		// canvas.setBackgroundColor(PLAYFIELD_COLOR);
+	private HorizontalLayout addButtonLayoutToMainLayout() {
+		HorizontalLayout buttons = new HorizontalLayout();
+		buttons.setMargin(false);
+		buttons.setSpacing(true);
+		layout.addComponent(buttons);
+		return buttons;
+	}
 
-		// Label for score
-		scoreLabel = new Label("");
-		layout.addComponent(scoreLabel);
+	private void addInstructionLabelComponentToMainLayout() {
+		layout.addComponent(new Label(
+				"<h1>Serverside Tetris - using plain web technologies</h1>"
+						+ "This is a demo application that "
+						+ "proves server side java can work for even "
+						+ "interactive games. Game code runs in server side using "
+						+ "<a href='http://vaadin.com/'>Vaadin</a>, constantly open "
+						+ "communication channel is provided Vaadin 7.1 Push"
+						+ "and graphics are drawn with <a href='http://vaadin.com/directory#addon/canvas'>Canvas addon"
+						+ " widget</a>. Note that the communication is not even optimized "
+						+ "anyhow. With e.g. SVG and based solution the amount of "
+						+ "transfered data would be much smaller. Still the game is playable, even over mobile GSM network.",
+				ContentMode.HTML));
+	}
 
+	private void addRestartButtonToMainLayout() {
+		final Button restartBtn;
+		layout.addComponent(restartBtn = new Button("start",
+				new Button.ClickListener() {
+					private static final long serialVersionUID = 1L;
+
+					public void buttonClick(ClickEvent event) {
+						running = !running;
+						if (running) {
+							game = new Game(10, 20);
+							startGameThread();
+							event.getButton().setCaption("stop");
+						} else {
+							event.getButton().setCaption("start");
+							gameOver();
+						}
+
+					}
+				}));
+		restartBtn.setClickShortcut(KeyCode.ESCAPE);
+	}
+
+	private VerticalLayout configureMainLayout() {
+		layout = new VerticalLayout();
+		layout.setSpacing(true);
+		layout.setMargin(true);
+		return layout;
+	}
+
+	private void setPageTitle() {
+		Page.getCurrent().setTitle(PAGE_TITLE);
 	}
 
 	/**
 	 * Start the game thread that updates the game periodically.
-	 * 
+	 *
 	 */
 	protected synchronized void startGameThread() {
 		Thread t = new Thread() {
@@ -184,7 +210,7 @@ public class TetrisUI extends UI {
 
 					// Draw the state
 					access(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							drawGameState();
@@ -205,7 +231,7 @@ public class TetrisUI extends UI {
 
 				// Notify user that game is over
 				access(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						gameOver();
@@ -219,11 +245,11 @@ public class TetrisUI extends UI {
 
 	/**
 	 * Update the score display.
-	 * 
+	 *
 	 */
 	protected synchronized void updateScore() {
 		access(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				scoreLabel.setValue("Score: " + game.getScore());
@@ -233,7 +259,7 @@ public class TetrisUI extends UI {
 
 	/**
 	 * Quit the game.
-	 * 
+	 *
 	 */
 	protected synchronized void gameOver() {
 		running = false;
@@ -243,7 +269,7 @@ public class TetrisUI extends UI {
 
 	/**
 	 * Draw the current game state.
-	 * 
+	 *
 	 */
 	protected synchronized void drawGameState() {
 

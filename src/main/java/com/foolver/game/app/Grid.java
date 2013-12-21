@@ -1,4 +1,4 @@
-package org.vaadin.sami.tetris;
+package com.foolver.game.app;
 
 /**
  * Generic grid for integer values and operations.

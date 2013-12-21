@@ -1,4 +1,4 @@
-package org.vaadin.sami.tetris;
+package com.foolver.game.app;
 
 /**
  * Tetis game class.

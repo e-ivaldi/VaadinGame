@@ -3,13 +3,14 @@ package com.foolver.game.config.ui;
 import org.vaadin.hezamu.canvas.Canvas;
 
 import com.foolver.game.app.game.Game;
-import com.foolver.game.app.input.abstr.InputHandler;
-import com.foolver.game.app.input.impl.InputHandlerImpl;
+import com.foolver.game.app.input.abstr.*;
+import com.foolver.game.app.input.impl.*;
 import com.foolver.game.app.launcher.GameLauncher;
 import com.foolver.game.app.states.abstr.GameState;
-import com.foolver.game.app.states.impl.MainState;
+import com.foolver.game.app.states.impl.*;
+import com.foolver.game.app.states.impl.SimpleGameStateFactory.GameStateID;
 import com.foolver.game.utils.Constants;
-import com.foolver.game.utils.mock.MockInputHandler;
+import com.foolver.game.utils.mock.MockMouseHandler;
 import com.vaadin.annotations.Push;
 import com.vaadin.server.*;
 import com.vaadin.ui.*;
@@ -23,17 +24,22 @@ public class MainUI extends UI {
 	private VerticalLayout layout;
 	private Canvas canvas;
 
-	private GameState gameState = new MainState();
-	//TODO: using a mock inputhandler
-	private final Game game = new Game(gameState, new MockInputHandler());
-
 	@Override
 	protected void init(VaadinRequest request) {
+		final InputHandler inputHandler = new InputHandlerImpl();
+		final Game game = new Game(inputHandler);
+
+		SimpleGameStateFactory.initialize(game);
+		GameState gameState = SimpleGameStateFactory.getGameState(GameStateID.MAIN);
+		game.setGameState(gameState);
+
+
 		setPageTitle();
 		configureMainLayout();
 		setContent(layout);
 		configureCanvas();
-		startGameThread();
+		configureInputHandlers(inputHandler);
+		startGameThread(game);
 	}
 
 	private void configureCanvas() {
@@ -41,6 +47,14 @@ public class MainUI extends UI {
 		canvas.setWidth(getPxOfInteger(Constants.CANVAS_WIDTH));
 		canvas.setHeight(getPxOfInteger(Constants.CANVAS_HEIGHT));
 		layout.addComponent(canvas);
+	}
+
+	private void configureInputHandlers(InputHandler inputHandler) {
+		KeyboardHandlerConfigurator keyboardHandlercongiruator = new KeyboardHandlerConfigurator(layout);
+		KeyboardHandler keyboardHandler = new KeyboardHandlerImpl(keyboardHandlercongiruator);
+		MouseHandler mouseHandler = new MockMouseHandler();
+		inputHandler.setKeyboardHandler(keyboardHandler);
+		inputHandler.setMouseHandler(mouseHandler);
 	}
 
 	private String getPxOfInteger(int number) {
@@ -58,7 +72,7 @@ public class MainUI extends UI {
 		Page.getCurrent().setTitle(PAGE_TITLE);
 	}
 
-	protected synchronized void startGameThread() {
+	protected synchronized void startGameThread(Game game) {
 		Thread gameLauncher = new GameLauncher(this, game, canvas);
 		gameLauncher.start();
 	}

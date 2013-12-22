@@ -7,11 +7,6 @@ public class InputHandlerImpl implements InputHandler {
 	private MouseHandler mouseHandler;
 	private KeyboardHandler keyboardHandler;
 
-	public InputHandlerImpl(MouseHandler mouseHandler, KeyboardHandler keyboardHandler){
-		this.mouseHandler = mouseHandler;
-		this.keyboardHandler = keyboardHandler;
-	}
-
 	@Override
 	public MouseHandler getMouseHandler() {
 		return this.mouseHandler;
@@ -21,4 +16,13 @@ public class InputHandlerImpl implements InputHandler {
 	public KeyboardHandler getKeyboardHandler() {
 		return this.keyboardHandler;
 	}
+
+	public void setMouseHandler(MouseHandler mouseHandler) {
+		this.mouseHandler = mouseHandler;
+	}
+
+	public void setKeyboardHandler(KeyboardHandler keyboardHandler) {
+		this.keyboardHandler = keyboardHandler;
+	}
+
 }

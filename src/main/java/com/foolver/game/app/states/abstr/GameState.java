@@ -3,11 +3,17 @@ package com.foolver.game.app.states.abstr;
 import org.vaadin.hezamu.canvas.Canvas;
 
 import com.foolver.game.app.components.abstr.GameComponent;
-import com.foolver.game.app.game.GameTime;
+import com.foolver.game.app.game.*;
 import com.foolver.game.app.input.abstr.InputHandler;
 import com.foolver.game.utils.Constants;
 
 public abstract class GameState implements GameComponent {
+
+	private Game game;
+
+	public GameState(Game game){
+		this.game = game;
+	}
 
 	@Override
 	public void update(GameTime gameTime, InputHandler inputHandler) {
@@ -44,6 +50,10 @@ public abstract class GameState implements GameComponent {
 
 	private String prepareRelativeMousePositionString(InputHandler inputHandler) {
 		return String.format("Mouse relative position : %s,%s ", inputHandler.getMouseHandler().getRelativePosition().getX(), inputHandler.getMouseHandler().getRelativePosition().getY());
+	}
+
+	protected Game getGame(){
+		return this.game;
 	}
 
 }

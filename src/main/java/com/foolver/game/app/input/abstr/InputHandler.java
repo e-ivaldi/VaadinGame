@@ -6,4 +6,7 @@ public interface InputHandler {
 
 	KeyboardHandler getKeyboardHandler();
 
+	void setKeyboardHandler(KeyboardHandler keyboardHandler);
+
+	void setMouseHandler(MouseHandler mouseHandler);
 }

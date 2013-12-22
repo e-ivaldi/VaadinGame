@@ -15,8 +15,7 @@ public class Game {
 	private InputHandler inputHandler;
 	private GameTime gameTime;
 
-	public Game(GameState gameState, InputHandler inputHandler) {
-		setGameState(gameState);
+	public Game(InputHandler inputHandler) {
 		this.inputHandler = inputHandler;
 		// TODO implement GameTime
 		gameTime = new GameTime() {

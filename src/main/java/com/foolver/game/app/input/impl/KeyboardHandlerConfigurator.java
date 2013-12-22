@@ -40,6 +40,7 @@ public class KeyboardHandlerConfigurator {
 		};
 		button.setClickShortcut(keyCode);
 		button.addClickListener(clickListener);
+		button.setVisible(false);
 		layout.addComponent(button);
 		return button;
 	}

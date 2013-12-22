@@ -21,58 +21,61 @@ public class MainUI extends UI {
 	private static final String PAGE_TITLE = "The game";
 	private static final long serialVersionUID = -152735180021558969L;
 
-	private VerticalLayout layout;
-	private Canvas canvas;
-
 	@Override
 	protected void init(VaadinRequest request) {
-		final InputHandler inputHandler = new InputHandlerImpl();
+		//TODO this method does too many things and is too long
+		setPageTitle();
+		Layout mainLayout = createMainLayout();
+		setContent(mainLayout);
+
+		final InputHandler inputHandler = createInputHandler(mainLayout);
 		final Game game = new Game(inputHandler);
 
 		SimpleGameStateFactory.initialize(game);
 		GameState gameState = SimpleGameStateFactory.getGameState(GameStateID.MAIN);
 		game.setGameState(gameState);
 
+		Canvas canvas = createCanvas(mainLayout);
+		mainLayout = addCanvasToMainLayout(canvas, mainLayout);
 
-		setPageTitle();
-		configureMainLayout();
-		setContent(layout);
-		configureCanvas();
-		configureInputHandlers(inputHandler);
-		startGameThread(game);
+		startGameThread(game, canvas);
 	}
 
-	private void configureCanvas() {
-		canvas = new Canvas();
+	private Layout addCanvasToMainLayout(Canvas canvas, Layout mainLayout) {
+		mainLayout.addComponent(canvas);
+		return mainLayout;
+	}
+
+	private Canvas createCanvas(Layout layout) {
+		Canvas canvas = new Canvas();
 		canvas.setWidth(getPxOfInteger(Constants.CANVAS_WIDTH));
 		canvas.setHeight(getPxOfInteger(Constants.CANVAS_HEIGHT));
-		layout.addComponent(canvas);
+		return canvas;
 	}
 
-	private void configureInputHandlers(InputHandler inputHandler) {
+	private InputHandler createInputHandler(Layout layout) {
 		KeyboardHandlerConfigurator keyboardHandlercongiruator = new KeyboardHandlerConfigurator(layout);
 		KeyboardHandler keyboardHandler = new KeyboardHandlerImpl(keyboardHandlercongiruator);
 		MouseHandler mouseHandler = new MockMouseHandler();
-		inputHandler.setKeyboardHandler(keyboardHandler);
-		inputHandler.setMouseHandler(mouseHandler);
+		return new InputHandlerImpl(mouseHandler,keyboardHandler);
 	}
 
 	private String getPxOfInteger(int number) {
 		return number + "px";
 	}
 
-	private VerticalLayout configureMainLayout() {
-		layout = new VerticalLayout();
-		layout.setSpacing(true);
-		layout.setMargin(true);
-		return layout;
+	private Layout createMainLayout() {
+		VerticalLayout mainLayout = new VerticalLayout();
+		mainLayout.setSpacing(true);
+		mainLayout.setMargin(true);
+		return mainLayout;
 	}
 
 	private void setPageTitle() {
 		Page.getCurrent().setTitle(PAGE_TITLE);
 	}
 
-	protected synchronized void startGameThread(Game game) {
+	protected synchronized void startGameThread(Game game, Canvas canvas) {
 		Thread gameLauncher = new GameLauncher(this, game, canvas);
 		gameLauncher.start();
 	}

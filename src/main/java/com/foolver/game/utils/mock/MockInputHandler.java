@@ -17,14 +17,4 @@ public class MockInputHandler implements InputHandler{
 		return keyboardHandler;
 	}
 
-	@Override
-	public void setKeyboardHandler(KeyboardHandler keyboardHandler) {
-
-	}
-
-	@Override
-	public void setMouseHandler(MouseHandler mouseHandler) {
-
-	}
-
 }

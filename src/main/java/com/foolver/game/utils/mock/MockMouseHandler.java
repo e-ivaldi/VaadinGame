@@ -7,12 +7,12 @@ public class MockMouseHandler implements MouseHandler {
 
 	@Override
 	public Position getPosition() {
-		return Position.ZERO;
+		return Position.getPositionZERO();
 	}
 
 	@Override
 	public Position getRelativePosition() {
-		return Position.ZERO;
+		return Position.getPositionZERO();
 	}
 
 }

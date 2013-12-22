@@ -27,16 +27,16 @@ public class MainUI extends UI {
 		setPageTitle();
 		Layout mainLayout = createMainLayout();
 		setContent(mainLayout);
+		Canvas canvas = createCanvas(mainLayout);
+		mainLayout = addCanvasToMainLayout(canvas, mainLayout);
 
-		final InputHandler inputHandler = createInputHandler(mainLayout);
+		final InputHandler inputHandler = createInputHandler(mainLayout, canvas);
 		final Game game = new Game(inputHandler);
 
 		SimpleGameStateFactory.initialize(game);
 		GameState gameState = SimpleGameStateFactory.getGameState(GameStateID.MAIN);
 		game.setGameState(gameState);
 
-		Canvas canvas = createCanvas(mainLayout);
-		mainLayout = addCanvasToMainLayout(canvas, mainLayout);
 
 		startGameThread(game, canvas);
 	}
@@ -53,11 +53,12 @@ public class MainUI extends UI {
 		return canvas;
 	}
 
-	private InputHandler createInputHandler(Layout layout) {
-		KeyboardHandlerConfigurator keyboardHandlercongiruator = new KeyboardHandlerConfigurator(layout);
-		KeyboardHandler keyboardHandler = new KeyboardHandlerImpl(keyboardHandlercongiruator);
-		MouseHandler mouseHandler = new MockMouseHandler();
-		return new InputHandlerImpl(mouseHandler,keyboardHandler);
+	private InputHandler createInputHandler(Layout layout, Canvas canvas) {
+		KeyboardHandlerConfigurator keyboardHandlerConfigurator = new KeyboardHandlerConfigurator(layout);
+		MouseHandlerConfigurator mouseHandlerConfigurator = new MouseHandlerConfigurator(canvas);
+		KeyboardHandler keyboardHandler = new KeyboardHandlerImpl(keyboardHandlerConfigurator);
+		MouseHandler mouseHandler = new MouseHandlerImpl(mouseHandlerConfigurator);
+			return new InputHandlerImpl(mouseHandler,keyboardHandler);
 	}
 
 	private String getPxOfInteger(int number) {

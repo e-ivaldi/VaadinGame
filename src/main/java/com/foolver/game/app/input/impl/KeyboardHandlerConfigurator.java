@@ -17,7 +17,7 @@ public class KeyboardHandlerConfigurator {
 
 	private void configureAllKeyboardButtons(Layout layout) {
 		// TODO configuring only enter for now, needs to create a data
-		// structured fitted to keep track
+		// structure fitted to keeps track
 		// of the keyboard keys as in com.vaadin.event.ShortcutAction.KeyCode
 		for (int keyCode = 13; keyCode < 14; keyCode++) {
 			ButtonExtended button = configureButton(layout, keyCode);

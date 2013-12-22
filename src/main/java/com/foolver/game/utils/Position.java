@@ -5,8 +5,6 @@ public class Position {
 	private int x;
 	private int y;
 
-	public static final Position ZERO = new Position(0, 0);
-
 	public Position(int x, int y) {
 		setPosition(x, y);
 	}
@@ -22,5 +20,9 @@ public class Position {
 
 	public int getY() {
 		return y;
+	}
+
+	public static Position getPositionZERO(){
+		return new Position(0,0);
 	}
 }

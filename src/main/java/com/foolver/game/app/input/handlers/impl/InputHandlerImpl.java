@@ -1,13 +1,13 @@
-package com.foolver.game.app.input.impl;
+package com.foolver.game.app.input.handlers.impl;
 
-import com.foolver.game.app.input.abstr.*;
+import com.foolver.game.app.input.handlers.abstr.*;
 
 public class InputHandlerImpl implements InputHandler {
 
 	private MouseHandler mouseHandler;
 	private KeyboardHandler keyboardHandler;
 
-	public InputHandlerImpl(MouseHandler mouseHandler, KeyboardHandler keyboardHandler){
+	public InputHandlerImpl(MouseHandler mouseHandler, KeyboardHandler keyboardHandler) {
 		this.mouseHandler = mouseHandler;
 		this.keyboardHandler = keyboardHandler;
 	}

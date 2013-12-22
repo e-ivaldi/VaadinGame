@@ -1,4 +1,4 @@
-package com.foolver.game.app.input.impl;
+package com.foolver.game.app.input.configurators;
 
 import org.vaadin.hezamu.canvas.*;
 import org.vaadin.hezamu.canvas.Canvas.CanvasClickListener;

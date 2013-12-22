@@ -1,6 +1,6 @@
 package com.foolver.game.utils.mock;
 
-import com.foolver.game.app.input.abstr.*;
+import com.foolver.game.app.input.handlers.abstr.*;
 
 public class MockInputHandler implements InputHandler{
 

@@ -3,7 +3,7 @@ package com.foolver.game.app.components.abstr;
 import org.vaadin.hezamu.canvas.Canvas;
 
 import com.foolver.game.app.game.GameTime;
-import com.foolver.game.app.input.abstr.InputHandler;
+import com.foolver.game.app.input.handlers.abstr.InputHandler;
 
 public interface GameComponent {
 

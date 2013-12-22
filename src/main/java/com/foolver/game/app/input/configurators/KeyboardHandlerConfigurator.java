@@ -1,7 +1,8 @@
-package com.foolver.game.app.input.impl;
+package com.foolver.game.app.input.configurators;
 
 import java.util.*;
 
+import com.foolver.game.app.input.models.ButtonExtended;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.*;

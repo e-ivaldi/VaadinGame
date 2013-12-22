@@ -2,7 +2,7 @@ package com.foolver.game.app.game;
 
 import org.vaadin.hezamu.canvas.Canvas;
 
-import com.foolver.game.app.input.abstr.InputHandler;
+import com.foolver.game.app.input.handlers.abstr.InputHandler;
 import com.foolver.game.app.states.abstr.GameState;
 import com.vaadin.external.org.slf4j.*;
 

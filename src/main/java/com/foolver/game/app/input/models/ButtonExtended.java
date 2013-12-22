@@ -1,4 +1,4 @@
-package com.foolver.game.app.input.impl;
+package com.foolver.game.app.input.models;
 
 import com.vaadin.ui.Button;
 

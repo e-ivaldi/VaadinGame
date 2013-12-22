@@ -1,4 +1,4 @@
-package com.foolver.game.app.input.abstr;
+package com.foolver.game.app.input.handlers.abstr;
 
 import com.foolver.game.utils.Position;
 

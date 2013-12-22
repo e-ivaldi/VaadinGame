@@ -1,4 +1,4 @@
-package com.foolver.game.app.input.abstr;
+package com.foolver.game.app.input.handlers.abstr;
 
 public interface KeyboardHandler {
 

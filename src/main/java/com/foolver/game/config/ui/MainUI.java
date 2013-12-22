@@ -3,14 +3,14 @@ package com.foolver.game.config.ui;
 import org.vaadin.hezamu.canvas.Canvas;
 
 import com.foolver.game.app.game.Game;
-import com.foolver.game.app.input.abstr.*;
-import com.foolver.game.app.input.impl.*;
+import com.foolver.game.app.input.configurators.*;
+import com.foolver.game.app.input.handlers.abstr.*;
+import com.foolver.game.app.input.handlers.impl.*;
 import com.foolver.game.app.launcher.GameLauncher;
 import com.foolver.game.app.states.abstr.GameState;
 import com.foolver.game.app.states.impl.*;
 import com.foolver.game.app.states.impl.SimpleGameStateFactory.GameStateID;
 import com.foolver.game.utils.Constants;
-import com.foolver.game.utils.mock.MockMouseHandler;
 import com.vaadin.annotations.Push;
 import com.vaadin.server.*;
 import com.vaadin.ui.*;

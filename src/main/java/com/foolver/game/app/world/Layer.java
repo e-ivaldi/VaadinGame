@@ -1,24 +1,23 @@
 package com.foolver.game.app.world;
 
-import org.vaadin.hezamu.canvas.Canvas;
-
 import com.foolver.game.app.components.abstr.GameComponent;
-import com.foolver.game.app.game.GameTime;
 import com.foolver.game.app.input.handlers.abstr.InputHandler;
+import com.foolver.game.app.misc.GameTime;
+import com.foolver.game.integration.misc.CanvasWrapper;
 
 public class Layer implements GameComponent {
 
 	private Tile[][] layer;
 
-	public Layer(int rows, int columns){
+	public Layer(int rows, int columns) {
 		createLayer(rows, columns);
 	}
 
-	public int getRows(){
+	public int getRows() {
 		return layer.length;
 	}
 
-	public int getColumns(){
+	public int getColumns() {
 		return layer[0].length;
 	}
 
@@ -28,10 +27,10 @@ public class Layer implements GameComponent {
 	}
 
 	@Override
-	public void draw(GameTime gameTime, InputHandler inputHandler, Canvas canvas) {
+	public void draw(GameTime gameTime, InputHandler inputHandler, CanvasWrapper canvasWrapper) {
 		for (int row = 0; row < getRows(); row++) {
 			for (int column = 0; column < getColumns(); column++) {
-				layer[row][column].draw(gameTime, inputHandler, canvas);
+				layer[row][column].draw(gameTime, inputHandler, canvasWrapper);
 			}
 		}
 	}
@@ -46,6 +45,5 @@ public class Layer implements GameComponent {
 			}
 		}
 	}
-
 
 }

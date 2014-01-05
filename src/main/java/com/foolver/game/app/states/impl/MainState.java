@@ -1,12 +1,11 @@
 package com.foolver.game.app.states.impl;
 
-import org.vaadin.hezamu.canvas.Canvas;
-
-import com.foolver.game.app.game.*;
+import com.foolver.game.app.Game;
 import com.foolver.game.app.input.handlers.abstr.InputHandler;
+import com.foolver.game.app.misc.*;
 import com.foolver.game.app.states.abstr.GameState;
 import com.foolver.game.app.states.impl.SimpleGameStateFactory.GameStateID;
-import com.foolver.game.utils.Constants;
+import com.foolver.game.integration.misc.*;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.external.org.slf4j.*;
 
@@ -19,8 +18,8 @@ public class MainState extends GameState {
 	}
 
 	@Override
-	public void update(GameTime gameTime, InputHandler inputHandler ) {
-		if(inputHandler.getKeyboardHandler().isButtonClicked(KeyCode.ENTER)){
+	public void update(GameTime gameTime, InputHandler inputHandler) {
+		if (inputHandler.getKeyboardHandler().isButtonClicked(KeyCode.ENTER)) {
 			logger.info("button enter clicked");
 			GameState playGameState = SimpleGameStateFactory.getGameState(GameStateID.PLAY);
 			getGame().setGameState(playGameState);
@@ -28,24 +27,24 @@ public class MainState extends GameState {
 	}
 
 	@Override
-	public void draw(GameTime gameTime, InputHandler inputHandler, Canvas canvas) {
-		clearAndDrawBackground(canvas);
-		drawWelcomeScreen(canvas);
-		super.draw(gameTime, inputHandler, canvas);
+	public void draw(GameTime gameTime, InputHandler inputHandler, CanvasWrapper canvasWrapper) {
+		clearAndDrawBackground(canvasWrapper);
+		drawWelcomeScreen(canvasWrapper);
+		super.draw(gameTime, inputHandler, canvasWrapper);
 	}
 
-	private void drawWelcomeScreen(Canvas canvas) {
-		canvas.setFillStyle("white");
-		canvas.setFont("30px Arial");
-		canvas.fillText("Welcome to this game, let's have a look at how cool the brackground is.", 20, 150, 600);
-		canvas.fillText("PRESS ENTER.", 20, 250, 700);
+	private void drawWelcomeScreen(CanvasWrapper canvasWrapper) {
+		canvasWrapper.setFillStyle("white");
+		canvasWrapper.setFont("30px Arial");
+		canvasWrapper.fillText("Welcome to this game, let's have a look at how cool the brackground is.", 20, 150, 600);
+		canvasWrapper.fillText("PRESS ENTER.", 20, 250, 700);
 	}
 
 	// TODO: getCss is slow? Color.BLACK.getCSS()
-	private void clearAndDrawBackground(Canvas canvas) {
-		canvas.clear();
-		canvas.setFillStyle("black");
-		canvas.fillRect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
+	private void clearAndDrawBackground(CanvasWrapper canvasWrapper) {
+		canvasWrapper.clear();
+		canvasWrapper.setFillStyle("black");
+		canvasWrapper.fillRect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
 	}
 
 }

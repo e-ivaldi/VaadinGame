@@ -2,7 +2,7 @@ package com.foolver.game.app.states.impl;
 
 import java.util.*;
 
-import com.foolver.game.app.game.Game;
+import com.foolver.game.app.Game;
 import com.foolver.game.app.states.abstr.GameState;
 
 public class SimpleGameStateFactory {

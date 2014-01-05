@@ -1,4 +1,4 @@
-package com.foolver.game.app.input.configurators;
+package com.foolver.game.integration.input.configurators;
 
 import java.util.*;
 

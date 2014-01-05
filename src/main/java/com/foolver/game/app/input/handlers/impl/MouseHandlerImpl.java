@@ -1,8 +1,9 @@
 package com.foolver.game.app.input.handlers.impl;
 
-import com.foolver.game.app.input.configurators.MouseHandlerConfigurator;
 import com.foolver.game.app.input.handlers.abstr.MouseHandler;
-import com.foolver.game.utils.*;
+import com.foolver.game.app.misc.*;
+import com.foolver.game.integration.input.configurators.MouseHandlerConfigurator;
+import com.foolver.game.integration.misc.Constants;
 
 public class MouseHandlerImpl implements MouseHandler {
 

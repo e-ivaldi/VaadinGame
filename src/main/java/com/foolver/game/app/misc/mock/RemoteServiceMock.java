@@ -1,4 +1,4 @@
-package com.foolver.game.utils.mock;
+package com.foolver.game.app.misc.mock;
 
 import com.foolver.game.remote.RemoteService;
 

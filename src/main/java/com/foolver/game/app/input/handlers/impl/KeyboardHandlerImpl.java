@@ -1,7 +1,7 @@
 package com.foolver.game.app.input.handlers.impl;
 
-import com.foolver.game.app.input.configurators.KeyboardHandlerConfigurator;
 import com.foolver.game.app.input.handlers.abstr.KeyboardHandler;
+import com.foolver.game.integration.input.configurators.KeyboardHandlerConfigurator;
 
 public class KeyboardHandlerImpl implements KeyboardHandler {
 

@@ -1,7 +1,7 @@
-package com.foolver.game.utils.mock;
+package com.foolver.game.app.misc.mock;
 
 import com.foolver.game.app.input.handlers.abstr.MouseHandler;
-import com.foolver.game.utils.Position;
+import com.foolver.game.app.misc.Position;
 
 public class MockMouseHandler implements MouseHandler {
 

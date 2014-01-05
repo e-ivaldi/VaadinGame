@@ -1,9 +1,9 @@
-package com.foolver.game.app.game;
-
-import org.vaadin.hezamu.canvas.Canvas;
+package com.foolver.game.app;
 
 import com.foolver.game.app.input.handlers.abstr.InputHandler;
+import com.foolver.game.app.misc.GameTime;
 import com.foolver.game.app.states.abstr.GameState;
+import com.foolver.game.integration.misc.CanvasWrapper;
 import com.vaadin.external.org.slf4j.*;
 
 public class Game {
@@ -30,8 +30,8 @@ public class Game {
 		gameState.update(gameTime, inputHandler);
 	}
 
-	public void draw(Canvas canvas) {
-		gameState.draw(gameTime, inputHandler, canvas);
+	public void draw(CanvasWrapper canvasWrapper) {
+		gameState.draw(gameTime, inputHandler, canvasWrapper);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.foolver.game.utils;
+package com.foolver.game.app.misc;
 
 public class Position {
 

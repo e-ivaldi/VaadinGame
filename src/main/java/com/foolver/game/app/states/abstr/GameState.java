@@ -22,18 +22,31 @@ public abstract class GameState implements GameComponent {
 
 	@Override
 	public void draw(GameTime gameTime, InputHandler inputHandler, Canvas canvas) {
+		configureTextColorAndFont(canvas);
 		drawMousePosition(inputHandler, canvas);
+		drawMouseRelativePosition(inputHandler, canvas);
+		drawMouseRelativePositionInTiles(inputHandler, canvas);
+	}
+
+	private void configureTextColorAndFont(Canvas canvas) {
+		canvas.setFillStyle("yellow");
+		canvas.setFont("10px Arial");
 	}
 
 	// TODO: getCss is slow? Color.YELLOW.getCSS()
 	private void drawMousePosition(InputHandler inputHandler, Canvas canvas) {
-		canvas.setFillStyle("yellow");
-		canvas.setFont("10px Arial");
-
 		String mousePosition = prepareMousePositionString(inputHandler);
-		String relativeMousePosition = prepareRelativeMousePositionString(inputHandler);
 		canvas.fillText(mousePosition, 20, 50, 600);
+	}
+
+	private void drawMouseRelativePosition(InputHandler inputHandler, Canvas canvas) {
+		String relativeMousePosition = prepareRelativeMousePositionString(inputHandler);
 		canvas.fillText(relativeMousePosition, 20, 70, 600);
+	}
+
+	private void drawMouseRelativePositionInTiles(InputHandler inputHandler, Canvas canvas) {
+		String relativeMousePositionInTiles = prepareRelativeMousePositionInTileString(inputHandler);
+		canvas.fillText(relativeMousePositionInTiles, 20, 90, 600);
 	}
 
 	private String prepareMousePositionString(InputHandler inputHandler) {
@@ -42,6 +55,10 @@ public abstract class GameState implements GameComponent {
 
 	private String prepareRelativeMousePositionString(InputHandler inputHandler) {
 		return String.format("Mouse relative position : %s,%s ", inputHandler.getMouseHandler().getRelativePosition().getX(), inputHandler.getMouseHandler().getRelativePosition().getY());
+	}
+
+	private String prepareRelativeMousePositionInTileString(InputHandler inputHandler) {
+		return String.format("Mouse relative position in tiles : %s,%s ", inputHandler.getMouseHandler().getRelativePositionInTiles().getX(), inputHandler.getMouseHandler().getRelativePositionInTiles().getY());
 	}
 
 	protected Game getGame() {

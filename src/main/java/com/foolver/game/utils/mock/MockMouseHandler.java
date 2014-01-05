@@ -15,4 +15,9 @@ public class MockMouseHandler implements MouseHandler {
 		return Position.getPositionZERO();
 	}
 
+	@Override
+	public Position getRelativePositionInTiles() {
+		return Position.getPositionZERO();
+	}
+
 }

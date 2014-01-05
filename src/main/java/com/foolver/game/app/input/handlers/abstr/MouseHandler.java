@@ -7,4 +7,6 @@ public interface MouseHandler {
 	Position getPosition();
 
 	Position getRelativePosition();
+
+	Position getRelativePositionInTiles();
 }

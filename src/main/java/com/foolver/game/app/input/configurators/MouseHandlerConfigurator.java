@@ -3,35 +3,44 @@ package com.foolver.game.app.input.configurators;
 import org.vaadin.hezamu.canvas.*;
 import org.vaadin.hezamu.canvas.Canvas.CanvasClickListener;
 
-import com.foolver.game.utils.Position;
 import com.vaadin.shared.MouseEventDetails;
 
 public class MouseHandlerConfigurator {
 
-	private Position position = Position.getPositionZERO();
-	private Position relativePosition = Position.getPositionZERO();
+	int x, y;
+	int relativeX, relativeY;
 
 	public MouseHandlerConfigurator(Canvas canvas) {
 		configurePositions(canvas);
 	}
 
 	private void configurePositions(Canvas canvas) {
-		CanvasClickListener canvasClickListener = new CanvasClickListener(){
+		CanvasClickListener canvasClickListener = new CanvasClickListener() {
 			@Override
 			public void clicked(MouseEventDetails med) {
-				position.setPosition(med.getClientX(), med.getClientY());
-				relativePosition.setPosition(med.getRelativeX(), med.getRelativeY());
+				x = med.getClientX();
+				y = med.getClientY();
+				relativeX = med.getRelativeX();
+				relativeY = med.getRelativeY();
 			}
 		};
 		canvas.addListener(canvasClickListener);
 	}
 
-	public Position getPosition() {
-		return position;
+	public int getX() {
+		return x;
 	}
 
-	public Position getRelativePosition() {
-		return relativePosition;
+	public int getY() {
+		return y;
+	}
+
+	public int getRelativeX() {
+		return relativeX;
+	}
+
+	public int getRelativeY() {
+		return relativeY;
 	}
 
 }

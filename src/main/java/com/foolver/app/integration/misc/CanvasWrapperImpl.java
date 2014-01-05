@@ -66,4 +66,9 @@ public class CanvasWrapperImpl implements CanvasWrapper {
 	public void rect(int i, int j, int width, int height) {
 		canvas.rect(i, j, width, height);
 	}
+
+	@Override
+	public void drawImage3(String url, int sourceX, int sourceY, int sourceWidth, int sourceHeight, int destX, int destY, int destWidth, int destHeight) {
+		canvas.drawImage3(url, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+	}
 }

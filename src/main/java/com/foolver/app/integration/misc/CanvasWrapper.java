@@ -24,4 +24,6 @@ public interface CanvasWrapper {
 
 	void rect(int i, int j, int tileWidth, int tileHeight);
 
+	void drawImage3(String imageUrl, int i, int j, int frameWidth, int frameHeight, int k, int l, int userWidth, int userHeight);
+
 }

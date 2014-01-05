@@ -16,8 +16,8 @@ public class CanvasWrapperImpl implements CanvasWrapper {
 	}
 
 	@Override
-	public void setLineWidth(double d) {
-		canvas.setLineWidth(d);
+	public void setLineWidth(double width) {
+		canvas.setLineWidth(width);
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class CanvasWrapperImpl implements CanvasWrapper {
 	}
 
 	@Override
-	public void fillText(String relativeMousePosition, int i, int j, int k) {
-		canvas.fillText(relativeMousePosition, i,j,k);
+	public void fillText(String relativeMousePosition, int x, int y, int maxWidth) {
+		canvas.fillText(relativeMousePosition, x, y, maxWidth);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class CanvasWrapperImpl implements CanvasWrapper {
 
 	@Override
 	public void setFont(String string) {
-		canvas.clear();
+		canvas.setFont(string);
 
 	}
 

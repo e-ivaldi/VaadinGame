@@ -9,7 +9,7 @@ import com.foolver.game.integration.misc.CanvasWrapper;
 
 public class Level implements GameComponent {
 
-	private List<Layer> level = new ArrayList<>();
+	private List<Layer> layerList = new ArrayList<>();
 
 	public Level() {
 		addLayersToLevel();
@@ -18,19 +18,19 @@ public class Level implements GameComponent {
 	private void addLayersToLevel() {
 		// TODO: wip, create a single layer with hardcoded values only for test
 		Layer layer0 = new Layer(15, 20);
-		level.add(layer0);
+		layerList.add(layer0);
 	}
 
 	@Override
 	public void update(GameTime gameTime, InputHandler inputHandler) {
-		for (int i = 0; i < level.size(); i++)
-			level.get(i).update(gameTime, inputHandler);
+		for (int i = 0; i < layerList.size(); i++)
+			layerList.get(i).update(gameTime, inputHandler);
 	}
 
 	@Override
 	public void draw(GameTime gameTime, InputHandler inputHandler, CanvasWrapper canvasWrapper) {
-		for (int i = 0; i < level.size(); i++)
-			level.get(i).draw(gameTime, inputHandler, canvasWrapper);
+		for (int i = 0; i < layerList.size(); i++)
+			layerList.get(i).draw(gameTime, inputHandler, canvasWrapper);
 	}
 
 }

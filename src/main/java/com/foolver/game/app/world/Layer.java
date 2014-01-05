@@ -7,18 +7,18 @@ import com.foolver.game.integration.misc.CanvasWrapper;
 
 public class Layer implements GameComponent {
 
-	private Tile[][] layer;
+	private Tile[][] tileMatrix;
 
 	public Layer(int rows, int columns) {
 		createLayer(rows, columns);
 	}
 
 	public int getRows() {
-		return layer.length;
+		return tileMatrix.length;
 	}
 
 	public int getColumns() {
-		return layer[0].length;
+		return tileMatrix[0].length;
 	}
 
 	@Override
@@ -30,18 +30,18 @@ public class Layer implements GameComponent {
 	public void draw(GameTime gameTime, InputHandler inputHandler, CanvasWrapper canvasWrapper) {
 		for (int row = 0; row < getRows(); row++) {
 			for (int column = 0; column < getColumns(); column++) {
-				layer[row][column].draw(gameTime, inputHandler, canvasWrapper);
+				tileMatrix[row][column].draw(gameTime, inputHandler, canvasWrapper);
 			}
 		}
 	}
 
 	private void createLayer(int rows, int columns) {
-		layer = new Tile[rows][columns];
+		tileMatrix = new Tile[rows][columns];
 		for (int row = 0; row < getRows(); row++) {
 			for (int column = 0; column < getColumns(); column++) {
 				Tile tile = new Tile();
 				tile.setPosition(column, row);
-				layer[row][column] = tile;
+				tileMatrix[row][column] = tile;
 			}
 		}
 	}

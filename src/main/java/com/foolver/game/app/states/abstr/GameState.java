@@ -22,15 +22,7 @@ public abstract class GameState implements GameComponent {
 
 	@Override
 	public void draw(GameTime gameTime, InputHandler inputHandler, Canvas canvas) {
-		clearAndDrawBackground(canvas);
 		drawMousePosition(inputHandler, canvas);
-	}
-
-	// TODO: getCss is slow? Color.BLACK.getCSS()
-	private void clearAndDrawBackground(Canvas canvas) {
-		canvas.clear();
-		canvas.setFillStyle("black");
-		canvas.fillRect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
 	}
 
 	// TODO: getCss is slow? Color.YELLOW.getCSS()

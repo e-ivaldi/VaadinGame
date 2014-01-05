@@ -50,6 +50,7 @@ public class GameLauncher extends Thread{
 				game.draw(canvas);
 			}
 		});
+
 	}
 
 	private void sleepGame() {

@@ -13,9 +13,10 @@ import com.foolver.game.app.states.impl.SimpleGameStateFactory.GameStateID;
 import com.foolver.game.utils.Constants;
 import com.vaadin.annotations.Push;
 import com.vaadin.server.*;
+import com.vaadin.shared.communication.PushMode;
 import com.vaadin.ui.*;
 
-@Push
+@Push(PushMode.AUTOMATIC)
 public class MainUI extends UI {
 
 	private static final String PAGE_TITLE = "The game";
@@ -23,7 +24,7 @@ public class MainUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		//TODO this method does too many things and is too long
+		// TODO this method does too many things and is too long
 		setPageTitle();
 		Layout mainLayout = createMainLayout();
 		setContent(mainLayout);
@@ -36,7 +37,6 @@ public class MainUI extends UI {
 		SimpleGameStateFactory.initialize(game);
 		GameState gameState = SimpleGameStateFactory.getGameState(GameStateID.MAIN);
 		game.setGameState(gameState);
-
 
 		startGameThread(game, canvas);
 	}
@@ -58,7 +58,7 @@ public class MainUI extends UI {
 		MouseHandlerConfigurator mouseHandlerConfigurator = new MouseHandlerConfigurator(canvas);
 		KeyboardHandler keyboardHandler = new KeyboardHandlerImpl(keyboardHandlerConfigurator);
 		MouseHandler mouseHandler = new MouseHandlerImpl(mouseHandlerConfigurator);
-			return new InputHandlerImpl(mouseHandler,keyboardHandler);
+		return new InputHandlerImpl(mouseHandler, keyboardHandler);
 	}
 
 	private String getPxOfInteger(int number) {

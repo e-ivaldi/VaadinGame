@@ -6,6 +6,7 @@ import com.foolver.game.app.game.*;
 import com.foolver.game.app.input.handlers.abstr.InputHandler;
 import com.foolver.game.app.states.abstr.GameState;
 import com.foolver.game.app.states.impl.SimpleGameStateFactory.GameStateID;
+import com.foolver.game.utils.Constants;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.external.org.slf4j.*;
 
@@ -28,8 +29,9 @@ public class MainState extends GameState {
 
 	@Override
 	public void draw(GameTime gameTime, InputHandler inputHandler, Canvas canvas) {
-		super.draw(gameTime, inputHandler, canvas);
+		clearAndDrawBackground(canvas);
 		drawWelcomeScreen(canvas);
+		super.draw(gameTime, inputHandler, canvas);
 	}
 
 	private void drawWelcomeScreen(Canvas canvas) {
@@ -37,6 +39,13 @@ public class MainState extends GameState {
 		canvas.setFont("30px Arial");
 		canvas.fillText("Welcome to this game, let's have a look at how cool the brackground is.", 20, 150, 600);
 		canvas.fillText("PRESS ENTER.", 20, 250, 700);
+	}
+
+	// TODO: getCss is slow? Color.BLACK.getCSS()
+	private void clearAndDrawBackground(Canvas canvas) {
+		canvas.clear();
+		canvas.setFillStyle("black");
+		canvas.fillRect(0, 0, Constants.CANVAS_WIDTH, Constants.CANVAS_HEIGHT);
 	}
 
 }

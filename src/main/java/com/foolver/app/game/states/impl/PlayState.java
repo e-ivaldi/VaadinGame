@@ -6,7 +6,6 @@ import com.foolver.app.game.Game;
 import com.foolver.app.game.components.abstr.GameComponent;
 import com.foolver.app.game.input.handlers.abstr.InputHandler;
 import com.foolver.app.game.misc.GameTime;
-import com.foolver.app.game.mobiles.*;
 import com.foolver.app.game.mobiles.abstr.Player;
 import com.foolver.app.game.mobiles.impl.PlayerImpl;
 import com.foolver.app.game.states.abstr.GameState;
@@ -41,13 +40,13 @@ public class PlayState extends GameState {
 
 	@Override
 	public void update(GameTime gameTime, InputHandler inputHandler) {
-		for(int i=0;i<gameComponents.size();i++)
+		for (int i = 0; i < gameComponents.size(); i++)
 			gameComponents.get(i).update(gameTime, inputHandler);
 	}
 
 	@Override
 	public void draw(GameTime gameTime, InputHandler inputHandler, CanvasWrapper canvasWrapper) {
-		for(int i=0;i<gameComponents.size();i++)
+		for (int i = 0; i < gameComponents.size(); i++)
 			gameComponents.get(i).draw(gameTime, inputHandler, canvasWrapper);
 		super.draw(gameTime, inputHandler, canvasWrapper);
 	}

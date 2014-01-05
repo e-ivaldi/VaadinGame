@@ -11,11 +11,11 @@
     <servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
     <init-param>
       <param-name>ui</param-name>
-      <param-value>com.foolver.game.vaadin.ui.MainUI</param-value>
+      <param-value>com.foolver.app.vaadin.ui.MainUI</param-value>
     </init-param>
     <init-param>
       <param-name>widgetset</param-name>
-      <param-value>com.foolver.game.vaadin.widgetset.Widgetset</param-value>
+      <param-value>com.foolver.app.vaadin.widgetset.Widgetset</param-value>
     </init-param>
     <async-supported>true</async-supported>
   </servlet>

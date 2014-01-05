@@ -2,7 +2,7 @@ package com.foolver.game.test.app.world;
 
 import org.junit.*;
 
-import com.foolver.game.app.world.Layer;
+import com.foolver.app.game.world.Layer;
 
 public class LayerTest {
 
